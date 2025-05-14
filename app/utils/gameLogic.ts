@@ -171,8 +171,7 @@ export class GameManager {
     } else {
       // Simple -1 for wrong answer, but don't go below 0
       this.gameState.score = Math.max(0, this.gameState.score - 1);
-      // Reset consecutive correct count on wrong answer
-      this.gameState.consecutiveCorrect = 0;
+      // Don't reset consecutive correct count on wrong answers anymore
     }
 
     return isCorrect;

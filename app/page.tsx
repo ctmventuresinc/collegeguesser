@@ -101,7 +101,7 @@ export default function Home() {
             left: `${i * 20}%`,
             top: "0",
             height: "100%",
-            width: "3px",
+            width: "4px",
             backgroundColor:
               i <= gameState.consecutiveCorrect ? "#333" : "#ddd",
             zIndex: 2,
@@ -167,6 +167,66 @@ export default function Home() {
         >
           WhichHU.com
         </h1>
+
+        {/* Progress Bar Section - Below title */}
+        <div
+          style={{
+            width: "80%",
+            maxWidth: "500px",
+            marginTop: "20px",
+            marginBottom: "15px",
+            position: "relative",
+            padding: "5px 0",
+          }}
+        >
+          {/* Main Progress Bar */}
+          <div
+            style={{
+              width: "100%",
+              height: "35px",
+              backgroundColor: "#e0e0e0",
+              borderRadius: "17px",
+              overflow: "hidden",
+              position: "relative",
+              boxShadow: "inset 0 2px 5px rgba(0,0,0,0.2)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {/* Level Indicator (centered in progress bar) */}
+            <div
+              style={{
+                fontSize: "18px",
+                fontWeight: "bold",
+                color: "#333",
+                zIndex: 3,
+                position: "relative",
+                textShadow: "0px 0px 3px rgba(255,255,255,0.8)",
+              }}
+            >
+              Level {gameState.difficulty}
+            </div>
+
+            {/* Streak Progress Fill */}
+            <div
+              style={{
+                position: "absolute",
+                top: "0",
+                left: "0",
+                height: "100%",
+                width: getStreakProgressWidth(),
+                backgroundColor: "#4285F4",
+                borderRadius: "17px 0 0 17px",
+                transition: "width 0.3s ease-in-out",
+                zIndex: 0,
+              }}
+            />
+
+            {/* Segment Markers */}
+            {renderSegmentMarkers()}
+          </div>
+        </div>
       </div>
 
       {/* Element 2: Student Photo - Will fill available space */}
@@ -174,151 +234,67 @@ export default function Home() {
         style={{
           flex: 1,
           display: "flex",
-          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           padding: "5px 0",
         }}
       >
         {currentStudent && (
-          <>
-            <div
-              ref={photoCardRef}
+          <div
+            style={{
+              position: "relative",
+              width: "auto",
+              height: "100%",
+              maxWidth: "calc(100vw - 90px)",
+              maxHeight: "90%",
+              aspectRatio: "200/259",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "white",
+              borderRadius: "16px",
+              boxShadow: "0 6px 24px rgba(0,0,0,0.10)",
+              overflow: "hidden",
+            }}
+          >
+            <Image
+              src={currentStudent.imageUrl}
+              alt="Student"
               style={{
-                position: "relative",
-                width: "auto",
+                width: "100%",
                 height: "100%",
-                maxWidth: "calc(100vw - 90px)",
-                maxHeight: "90%",
-                aspectRatio: "200/259",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "white",
-                borderRadius: "16px",
-                boxShadow: "0 6px 24px rgba(0,0,0,0.10)",
-                overflow: "hidden",
+                objectFit: "cover",
+                objectPosition: "50% 30%",
               }}
-            >
-              <Image
-                src={currentStudent.imageUrl}
-                alt="Student"
+              width={200}
+              height={259}
+              priority
+            />
+            {feedback && (
+              <div
                 style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "50% 30%",
-                }}
-                width={200}
-                height={259}
-                priority
-              />
-              {feedback && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor:
-                      feedback === "Correct!"
-                        ? "rgba(0, 128, 0, 0.5)"
-                        : "rgba(255, 0, 0, 0.5)",
-                    color: "white",
-                    fontSize: "min(48px, 8vh)",
-                    fontWeight: "bold",
-                    zIndex: 10,
-                  }}
-                >
-                  {feedback}
-                </div>
-              )}
-            </div>
-
-            {/* Progress Bar Section */}
-            <div
-              style={{
-                width: progressBarWidth > 0 ? `${progressBarWidth}px` : "auto",
-                marginTop: "25px",
-                position: "relative",
-              }}
-            >
-              {/* Level Indicator */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "-22px",
-                  left: "0",
-                  fontSize: "16px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor:
+                    feedback === "Correct!"
+                      ? "rgba(0, 128, 0, 0.5)"
+                      : "rgba(255, 0, 0, 0.5)",
+                  color: "white",
+                  fontSize: "min(48px, 8vh)",
                   fontWeight: "bold",
-                  color: "#333",
+                  zIndex: 10,
                 }}
               >
-                Level {gameState.difficulty}
+                {feedback}
               </div>
-
-              {/* Score Display */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "-22px",
-                  right: "0",
-                  fontSize: "16px",
-                  color: "#333",
-                }}
-              >
-                Score: {gameState.score}
-              </div>
-
-              {/* Main Progress Bar */}
-              <div
-                style={{
-                  width: "100%",
-                  height: "30px",
-                  backgroundColor: "#e0e0e0",
-                  borderRadius: "15px",
-                  overflow: "hidden",
-                  position: "relative",
-                  boxShadow: "inset 0 1px 3px rgba(0,0,0,0.2)",
-                }}
-              >
-                {/* Streak Progress Fill */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    left: "0",
-                    height: "100%",
-                    width: getStreakProgressWidth(),
-                    backgroundColor: "#4285F4",
-                    borderRadius: "15px 0 0 15px",
-                    transition: "width 0.3s ease-in-out",
-                    zIndex: 0,
-                  }}
-                />
-
-                {/* Segment Markers */}
-                {renderSegmentMarkers()}
-              </div>
-
-              {/* "5 in a row" text */}
-              <div
-                style={{
-                  position: "absolute",
-                  right: "0",
-                  bottom: "-22px",
-                  fontSize: "14px",
-                  color: "#666",
-                }}
-              >
-                {gameState.consecutiveCorrect}/5 to next level
-              </div>
-            </div>
-          </>
+            )}
+          </div>
         )}
       </div>
 
