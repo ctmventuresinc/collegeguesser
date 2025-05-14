@@ -52,10 +52,11 @@ export default function Home() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "space-between",
-        padding: "2vh 5vw",
+        justifyContent: "flex-start",
+        padding: "2vh 5vw 80px 5vw",
         boxSizing: "border-box",
         backgroundColor: "#f5f5f5",
+        color: "#000",
       }}
     >
       <div
@@ -64,6 +65,7 @@ export default function Home() {
           flexDirection: "column",
           alignItems: "center",
           paddingTop: "2vh",
+          width: "100%",
         }}
       >
         <h1
@@ -72,6 +74,7 @@ export default function Home() {
             fontWeight: "bold",
             fontFamily: "sans-serif",
             margin: 0,
+            color: "#000",
           }}
         >
           WhichHU.com
@@ -81,6 +84,7 @@ export default function Home() {
             fontSize: "min(24px, 4vh)",
             fontFamily: "sans-serif",
             marginTop: "1vh",
+            color: "#000",
           }}
         >
           Score: {gameState.score}/{gameState.totalPlayed}
@@ -92,10 +96,11 @@ export default function Home() {
           style={{
             position: "relative",
             width: "auto",
-            height: "calc(100vh - 250px)",
-            maxHeight: "70vh",
-            aspectRatio: "200/259",
+            height: "calc(100vh - 200px)",
+            maxWidth: "calc(100vw - 40px)",
+            maxHeight: "60vh",
             margin: "10px auto",
+            aspectRatio: "200/259",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -147,9 +152,16 @@ export default function Home() {
           display: "flex",
           justifyContent: "center",
           gap: "20px",
-          width: "90%",
+          width: "100%",
           maxWidth: "600px",
-          marginBottom: "3vh",
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          padding: "15px 20px",
+          backgroundColor: "#f5f5f5",
+          boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
+          zIndex: 100,
         }}
       >
         <button
