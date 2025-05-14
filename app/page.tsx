@@ -170,8 +170,9 @@ export default function Home() {
           onClick={() => handleSchoolSelection("Howard")}
           disabled={isAnimating}
           style={{
-            padding: "min(15px, 2.5vh)",
-            width: "50%",
+            padding: "min(20px, 3vh)",
+            width: "40%",
+            height: "min(80px, 10vh)",
             fontSize: "min(24px, 4vh)",
             fontWeight: "bold",
             color: "white",
@@ -188,8 +189,9 @@ export default function Home() {
           onClick={() => handleSchoolSelection("Hampton")}
           disabled={isAnimating}
           style={{
-            padding: "min(15px, 2.5vh)",
-            width: "50%",
+            padding: "min(20px, 3vh)",
+            width: "40%",
+            height: "min(80px, 10vh)",
             fontSize: "min(24px, 4vh)",
             fontWeight: "bold",
             color: "white",
