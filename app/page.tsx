@@ -94,35 +94,102 @@ export default function Home() {
   return (
     <div
       style={{
-        minHeight: "100vh",
+        height: "100vh",
+        width: "100vw",
+        overflow: "hidden",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
         alignItems: "center",
+        justifyContent: "space-between",
+        padding: "2vh 5vw",
+        boxSizing: "border-box",
         backgroundColor: "#f5f5f5",
       }}
     >
+      <h1
+        style={{
+          fontSize: "min(48px, 8vh)",
+          fontWeight: "bold",
+          fontFamily: "sans-serif",
+          margin: 0,
+          paddingTop: "2vh",
+        }}
+      >
+        WhichHU.com
+      </h1>
+
       {randomImage && (
         <div
           style={{
             position: "relative",
-            width: "300px",
-            height: "300px",
-            boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-            borderRadius: "8px",
-            overflow: "hidden",
+            width: "auto",
+            height: "60vh",
+            maxHeight: "60vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Image
             src={randomImage}
-            alt="Howard Player"
-            fill
+            alt="Player"
             style={{
-              objectFit: "cover",
+              height: "100%",
+              width: "auto",
+              maxWidth: "90vw",
+              maxHeight: "60vh",
+              objectFit: "contain",
+              borderRadius: "16px",
+              boxShadow: "0 6px 24px rgba(0,0,0,0.10)",
             }}
+            width={500}
+            height={650}
             priority
           />
         </div>
       )}
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "20px",
+          width: "90%",
+          maxWidth: "600px",
+          marginBottom: "3vh",
+        }}
+      >
+        <button
+          style={{
+            padding: "min(20px, 3vh)",
+            width: "50%",
+            fontSize: "min(28px, 5vh)",
+            fontWeight: "bold",
+            color: "white",
+            backgroundColor: "#8B0000",
+            border: "none",
+            borderRadius: "12px",
+            cursor: "pointer",
+          }}
+        >
+          Howard
+        </button>
+        <button
+          style={{
+            padding: "min(20px, 3vh)",
+            width: "50%",
+            fontSize: "min(28px, 5vh)",
+            fontWeight: "bold",
+            color: "white",
+            backgroundColor: "#00008B",
+            border: "none",
+            borderRadius: "12px",
+            cursor: "pointer",
+          }}
+        >
+          Hampton
+        </button>
+      </div>
     </div>
   );
 }
