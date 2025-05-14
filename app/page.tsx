@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { GameManager, GameState } from "./utils/gameLogic";
-import { Student } from "./data/students";
+import { Student, School } from "./data/students";
 
 export default function Home() {
   const [gameManager] = useState<GameManager>(() => new GameManager());
@@ -22,7 +22,7 @@ export default function Home() {
     setGameState(gameManager.getGameState());
   }, [gameManager]);
 
-  const handleSchoolSelection = (selectedSchool: "Howard" | "Hampton") => {
+  const handleSchoolSelection = (selectedSchool: School) => {
     if (isAnimating) return;
 
     setIsAnimating(true);
@@ -167,7 +167,7 @@ export default function Home() {
         }}
       >
         <button
-          onClick={() => handleSchoolSelection("Howard")}
+          onClick={() => handleSchoolSelection(School.HOWARD)}
           disabled={isAnimating}
           style={{
             padding: "min(20px, 3vh)",
@@ -186,7 +186,7 @@ export default function Home() {
           Howard
         </button>
         <button
-          onClick={() => handleSchoolSelection("Hampton")}
+          onClick={() => handleSchoolSelection(School.HAMPTON)}
           disabled={isAnimating}
           style={{
             padding: "min(20px, 3vh)",
