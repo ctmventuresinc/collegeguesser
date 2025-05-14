@@ -152,8 +152,160 @@ export const howardStudents: Student[] = [
   // Add the remaining Howard students
 ];
 
-// Hampton students will be added here once URLs are provided
-export const hamptonStudents: Student[] = [];
+// Hampton students based on the provided URL pattern
+export const hamptonStudents: Student[] = [
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Jackie%20Bates.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/James%20Butts.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Reggie%20Dixon.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/TJ%20Mitchell.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Dyrri%20McCain.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Chris%20Smith.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Sam%20Pope.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Jerry%20Cummings.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Pat%20Preston.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Jacobi%20Fenner.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Herbert%20Bynes.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Tyler%20Bailey.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Daniel%20Brooks.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Kevin%20Teel.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Vaughn%20Mansfield.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Devan%20Jarett.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Jeremy%20Gilchrist.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Gerard%20Griffin.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Kevin%20Beverly.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Dennis%20Mathis.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Henti%20Baird.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Jonathan%20Wade.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Rasoul%20Wilson.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Van%20Morgan.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Christopher%20Cills.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Jahmal%20Blanchard.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Tobin%20Lyon.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Darius%20Mullen.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Qutrell%20Payton.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  {
+    imageUrl:
+      "https://d33mrnwqfel57x.cloudfront.net/images/2008/9/11/Donnell%20Babb.jpg?width=800&quality=100&type=jpeg",
+    school: "Hampton",
+  },
+  // Adding first 30 Hampton students - more can be added as needed
+];
 
 // Combine all students for the game
 export const getAllStudents = (): Student[] => {
