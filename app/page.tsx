@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { GameManager, GameState } from "./utils/gameLogic";
 import { Student, School } from "./data/students";
@@ -22,6 +22,8 @@ export default function Home() {
   const [showInstructions, setShowInstructions] = useState(true);
   const [showLevelUp, setShowLevelUp] = useState(false);
   const [previousDifficulty, setPreviousDifficulty] = useState(1);
+  const photoCardRef = useRef<HTMLDivElement>(null);
+  const [progressBarWidth, setProgressBarWidth] = useState<number>(0);
 
   useEffect(() => {
     // Start first round on component mount
@@ -39,6 +41,22 @@ export default function Home() {
       setPreviousDifficulty(gameState.difficulty);
     }
   }, [gameState.difficulty, previousDifficulty]);
+
+  // Update progress bar width based on photo card width
+  useEffect(() => {
+    const updateWidth = () => {
+      if (photoCardRef.current) {
+        setProgressBarWidth(photoCardRef.current.offsetWidth);
+      }
+    };
+
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateWidth);
+    };
+  }, [currentStudent]);
 
   const handleInstructionsDismiss = () => {
     gameManager.dismissInstructions();
@@ -83,7 +101,7 @@ export default function Home() {
             left: `${i * 20}%`,
             top: "0",
             height: "100%",
-            width: "2px",
+            width: "3px",
             backgroundColor:
               i <= gameState.consecutiveCorrect ? "#333" : "#ddd",
             zIndex: 2,
@@ -94,12 +112,9 @@ export default function Home() {
     return markers;
   };
 
-  // Calculate progress width as percentage of score to total played, with minimum display
-  const getScoreProgressWidth = () => {
-    if (gameState.totalPlayed === 0) return "0%";
-    const percentage = (gameState.score / gameState.totalPlayed) * 100;
-    // Ensure there's always a visible progress when score > 0
-    return percentage > 0 ? `${Math.max(5, percentage)}%` : "0%";
+  // Calculate progress percentage based on consecutive correct answers
+  const getStreakProgressWidth = () => {
+    return `${gameState.consecutiveCorrect * 20}%`;
   };
 
   return (
@@ -152,100 +167,6 @@ export default function Home() {
         >
           WhichHU.com
         </h1>
-
-        {/* Progress Bar Section */}
-        <div
-          style={{
-            width: "90%",
-            maxWidth: "500px",
-            marginTop: "15px",
-            position: "relative",
-          }}
-        >
-          {/* Level Indicator */}
-          <div
-            style={{
-              position: "absolute",
-              top: "-22px",
-              left: "0",
-              fontSize: "16px",
-              fontWeight: "bold",
-              color: "#333",
-            }}
-          >
-            Level {gameState.difficulty}
-          </div>
-
-          {/* Score Display */}
-          <div
-            style={{
-              position: "absolute",
-              top: "-22px",
-              right: "0",
-              fontSize: "16px",
-              color: "#333",
-            }}
-          >
-            {gameState.score}/{gameState.totalPlayed}
-          </div>
-
-          {/* Main Progress Bar */}
-          <div
-            style={{
-              width: "100%",
-              height: "16px",
-              backgroundColor: "#e0e0e0",
-              borderRadius: "8px",
-              overflow: "hidden",
-              position: "relative",
-              boxShadow: "inset 0 1px 3px rgba(0,0,0,0.2)",
-            }}
-          >
-            {/* Score Progress (Background Fill) */}
-            <div
-              style={{
-                height: "100%",
-                width: getScoreProgressWidth(),
-                backgroundColor: "#6d98f7",
-                borderRadius: "8px",
-                transition: "width 0.3s ease-in-out",
-                zIndex: 1,
-                position: "relative",
-              }}
-            />
-
-            {/* Streak Progress Segments */}
-            <div
-              style={{
-                position: "absolute",
-                top: "0",
-                left: "0",
-                height: "100%",
-                width: `${gameState.consecutiveCorrect * 20}%`,
-                backgroundColor: "#4285F4",
-                borderRadius: "8px 0 0 8px",
-                transition: "width 0.3s ease-in-out",
-                zIndex: 0,
-              }}
-            />
-
-            {/* Segment Markers */}
-            {renderSegmentMarkers()}
-          </div>
-
-          {/* "5 in a row" text */}
-          <div
-            style={{
-              position: "absolute",
-              right: "0",
-              bottom: "-20px",
-              fontSize: "14px",
-              color: "#666",
-            }}
-          >
-            {gameState.consecutiveCorrect}/5 to next level
-          </div>
-        </div>
       </div>
 
       {/* Element 2: Student Photo - Will fill available space */}
@@ -253,67 +174,151 @@ export default function Home() {
         style={{
           flex: 1,
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           padding: "5px 0",
         }}
       >
         {currentStudent && (
-          <div
-            style={{
-              position: "relative",
-              width: "auto",
-              height: "100%",
-              maxWidth: "calc(100vw - 90px)",
-              maxHeight: "90%",
-              aspectRatio: "200/259",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "white",
-              borderRadius: "16px",
-              boxShadow: "0 6px 24px rgba(0,0,0,0.10)",
-              overflow: "hidden",
-            }}
-          >
-            <Image
-              src={currentStudent.imageUrl}
-              alt="Student"
+          <>
+            <div
+              ref={photoCardRef}
               style={{
-                width: "100%",
+                position: "relative",
+                width: "auto",
                 height: "100%",
-                objectFit: "cover",
-                objectPosition: "50% 30%",
+                maxWidth: "calc(100vw - 90px)",
+                maxHeight: "90%",
+                aspectRatio: "200/259",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "white",
+                borderRadius: "16px",
+                boxShadow: "0 6px 24px rgba(0,0,0,0.10)",
+                overflow: "hidden",
               }}
-              width={200}
-              height={259}
-              priority
-            />
-            {feedback && (
+            >
+              <Image
+                src={currentStudent.imageUrl}
+                alt="Student"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "50% 30%",
+                }}
+                width={200}
+                height={259}
+                priority
+              />
+              {feedback && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor:
+                      feedback === "Correct!"
+                        ? "rgba(0, 128, 0, 0.5)"
+                        : "rgba(255, 0, 0, 0.5)",
+                    color: "white",
+                    fontSize: "min(48px, 8vh)",
+                    fontWeight: "bold",
+                    zIndex: 10,
+                  }}
+                >
+                  {feedback}
+                </div>
+              )}
+            </div>
+
+            {/* Progress Bar Section */}
+            <div
+              style={{
+                width: progressBarWidth > 0 ? `${progressBarWidth}px` : "auto",
+                marginTop: "25px",
+                position: "relative",
+              }}
+            >
+              {/* Level Indicator */}
               <div
                 style={{
                   position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor:
-                    feedback === "Correct!"
-                      ? "rgba(0, 128, 0, 0.5)"
-                      : "rgba(255, 0, 0, 0.5)",
-                  color: "white",
-                  fontSize: "min(48px, 8vh)",
+                  top: "-22px",
+                  left: "0",
+                  fontSize: "16px",
                   fontWeight: "bold",
-                  zIndex: 10,
+                  color: "#333",
                 }}
               >
-                {feedback}
+                Level {gameState.difficulty}
               </div>
-            )}
-          </div>
+
+              {/* Score Display */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "-22px",
+                  right: "0",
+                  fontSize: "16px",
+                  color: "#333",
+                }}
+              >
+                Score: {gameState.score}
+              </div>
+
+              {/* Main Progress Bar */}
+              <div
+                style={{
+                  width: "100%",
+                  height: "30px",
+                  backgroundColor: "#e0e0e0",
+                  borderRadius: "15px",
+                  overflow: "hidden",
+                  position: "relative",
+                  boxShadow: "inset 0 1px 3px rgba(0,0,0,0.2)",
+                }}
+              >
+                {/* Streak Progress Fill */}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "0",
+                    left: "0",
+                    height: "100%",
+                    width: getStreakProgressWidth(),
+                    backgroundColor: "#4285F4",
+                    borderRadius: "15px 0 0 15px",
+                    transition: "width 0.3s ease-in-out",
+                    zIndex: 0,
+                  }}
+                />
+
+                {/* Segment Markers */}
+                {renderSegmentMarkers()}
+              </div>
+
+              {/* "5 in a row" text */}
+              <div
+                style={{
+                  position: "absolute",
+                  right: "0",
+                  bottom: "-22px",
+                  fontSize: "14px",
+                  color: "#666",
+                }}
+              >
+                {gameState.consecutiveCorrect}/5 to next level
+              </div>
+            </div>
+          </>
         )}
       </div>
 

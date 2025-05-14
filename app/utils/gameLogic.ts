@@ -156,6 +156,7 @@ export class GameManager {
     this.gameState.totalPlayed++;
 
     if (isCorrect) {
+      // Simple +1 for correct answer
       this.gameState.score++;
       this.gameState.consecutiveCorrect++;
 
@@ -168,6 +169,8 @@ export class GameManager {
         this.gameState.consecutiveCorrect = 0; // Reset consecutive count after difficulty increase
       }
     } else {
+      // Simple -1 for wrong answer, but don't go below 0
+      this.gameState.score = Math.max(0, this.gameState.score - 1);
       // Reset consecutive correct count on wrong answer
       this.gameState.consecutiveCorrect = 0;
     }
