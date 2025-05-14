@@ -68,7 +68,7 @@ export default function Home() {
       setCurrentStudent(nextStudent);
       setFeedback(null);
       setIsAnimating(false);
-    }, 1500);
+    }, 1000);
   };
 
   return (
@@ -184,18 +184,21 @@ export default function Home() {
               <div
                 style={{
                   position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                   backgroundColor:
                     feedback === "Correct!"
-                      ? "rgba(0, 128, 0, 0.8)"
-                      : "rgba(255, 0, 0, 0.8)",
+                      ? "rgba(0, 128, 0, 0.5)"
+                      : "rgba(255, 0, 0, 0.5)",
                   color: "white",
-                  padding: "20px 40px",
-                  borderRadius: "8px",
-                  fontSize: "min(36px, 6vh)",
+                  fontSize: "min(48px, 8vh)",
                   fontWeight: "bold",
+                  zIndex: 10,
                 }}
               >
                 {feedback}
@@ -223,7 +226,7 @@ export default function Home() {
             padding: "min(20px, 3vh)",
             width: "40%",
             height: "min(80px, 10vh)",
-            fontSize: "min(24px, 4vh)",
+            fontSize: "min(32px, 5vh)",
             fontWeight: "bold",
             color: "white",
             backgroundColor: "#8B0000",
@@ -233,7 +236,7 @@ export default function Home() {
             opacity: isAnimating ? 0.7 : 1,
           }}
         >
-          Howard
+          HOWARD
         </button>
         <button
           onClick={() => handleSchoolSelection(School.HAMPTON)}
@@ -242,7 +245,7 @@ export default function Home() {
             padding: "min(20px, 3vh)",
             width: "40%",
             height: "min(80px, 10vh)",
-            fontSize: "min(24px, 4vh)",
+            fontSize: "min(32px, 5vh)",
             fontWeight: "bold",
             color: "white",
             backgroundColor: "#00008B",
@@ -252,7 +255,7 @@ export default function Home() {
             opacity: isAnimating ? 0.7 : 1,
           }}
         >
-          Hampton
+          HAMPTON
         </button>
       </div>
     </div>

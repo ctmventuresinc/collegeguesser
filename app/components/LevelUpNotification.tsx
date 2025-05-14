@@ -45,16 +45,16 @@ const LevelUpNotification: React.FC<LevelUpNotificationProps> = ({
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          background-color: rgba(0, 0, 0, 0.9);
+          background-color: rgba(30, 30, 30, 0.95);
           color: white;
-          padding: 30px 60px;
-          border-radius: 15px;
+          padding: 40px 70px;
+          border-radius: 16px;
           z-index: 1000;
           text-align: center;
           opacity: 0;
           transition: opacity 0.5s ease, transform 0.3s ease;
-          box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-          border: 2px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+          border: 2px solid rgba(255, 255, 255, 0.25);
         }
 
         .level-up-notification.visible {
@@ -68,18 +68,20 @@ const LevelUpNotification: React.FC<LevelUpNotificationProps> = ({
         }
 
         .title {
-          margin: 0 0 15px 0;
-          font-size: 36px;
+          margin: 0 0 20px 0;
+          font-size: 42px;
           color: #f8f8f8;
-          text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+          text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
           text-transform: uppercase;
-          letter-spacing: 2px;
+          letter-spacing: 3px;
+          font-weight: bold;
         }
 
         .subtitle {
           margin: 0;
-          font-size: 24px;
+          font-size: 28px;
           color: #f0f0f0;
+          font-weight: 500;
         }
       `}</style>
     </>
