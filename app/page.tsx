@@ -91,15 +91,17 @@ export default function Home() {
         <div
           style={{
             position: "relative",
-            width: "min(320px, 80vw)",
-            height: "min(416px, 60vh)",
+            width: "auto",
+            height: "calc(100vh - 250px)",
+            maxHeight: "70vh",
+            aspectRatio: "200/259",
+            margin: "10px auto",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "white",
             borderRadius: "16px",
             boxShadow: "0 6px 24px rgba(0,0,0,0.10)",
-            aspectRatio: "200/259",
             overflow: "hidden",
           }}
         >
