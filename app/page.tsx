@@ -226,10 +226,13 @@ export default function Home() {
           onClick={() => handleSchoolSelection(School.HOWARD)}
           disabled={isAnimating}
           style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             padding: "min(20px, 3vh)",
             width: "40%",
             height: "min(80px, 10vh)",
-            fontSize: "min(32px, 5vh)",
+            fontSize: "clamp(12px, 6vw, 32px)",
             fontWeight: "bold",
             color: "white",
             backgroundColor: "#8B0000",
@@ -237,6 +240,8 @@ export default function Home() {
             borderRadius: "12px",
             cursor: isAnimating ? "default" : "pointer",
             opacity: isAnimating ? 0.7 : 1,
+            minWidth: 0,
+            textAlign: "center",
           }}
         >
           HOWARD
@@ -245,10 +250,13 @@ export default function Home() {
           onClick={() => handleSchoolSelection(School.HAMPTON)}
           disabled={isAnimating}
           style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             padding: "min(20px, 3vh)",
             width: "40%",
             height: "min(80px, 10vh)",
-            fontSize: "min(32px, 5vh)",
+            fontSize: "clamp(12px, 6vw, 32px)",
             fontWeight: "bold",
             color: "white",
             backgroundColor: "#00008B",
@@ -256,6 +264,8 @@ export default function Home() {
             borderRadius: "12px",
             cursor: isAnimating ? "default" : "pointer",
             opacity: isAnimating ? 0.7 : 1,
+            minWidth: 0,
+            textAlign: "center",
           }}
         >
           HAMPTON
