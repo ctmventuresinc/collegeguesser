@@ -71,6 +71,37 @@ export default function Home() {
     }, 1000);
   };
 
+  // Create segment markers for the progress bar
+  const renderSegmentMarkers = () => {
+    const markers = [];
+    for (let i = 1; i <= 5; i++) {
+      markers.push(
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            left: `${i * 20}%`,
+            top: "0",
+            height: "100%",
+            width: "2px",
+            backgroundColor:
+              i <= gameState.consecutiveCorrect ? "#333" : "#ddd",
+            zIndex: 2,
+          }}
+        />
+      );
+    }
+    return markers;
+  };
+
+  // Calculate progress width as percentage of score to total played, with minimum display
+  const getScoreProgressWidth = () => {
+    if (gameState.totalPlayed === 0) return "0%";
+    const percentage = (gameState.score / gameState.totalPlayed) * 100;
+    // Ensure there's always a visible progress when score > 0
+    return percentage > 0 ? `${Math.max(5, percentage)}%` : "0%";
+  };
+
   return (
     <div
       style={{
@@ -121,24 +152,99 @@ export default function Home() {
         >
           WhichHU.com
         </h1>
+
+        {/* Progress Bar Section */}
         <div
           style={{
-            display: "flex",
-            gap: "15px",
-            alignItems: "center",
-            fontSize: "min(18px, 2.8vh)",
-            fontFamily: "sans-serif",
-            marginTop: "0.5vh",
-            color: "#000",
+            width: "90%",
+            maxWidth: "500px",
+            marginTop: "15px",
+            position: "relative",
           }}
         >
-          <div>
-            Score: {gameState.score}/{gameState.totalPlayed}
+          {/* Level Indicator */}
+          <div
+            style={{
+              position: "absolute",
+              top: "-22px",
+              left: "0",
+              fontSize: "16px",
+              fontWeight: "bold",
+              color: "#333",
+            }}
+          >
+            Level {gameState.difficulty}
           </div>
-          <div>|</div>
-          <div>Streak: {gameState.consecutiveCorrect}/5</div>
-          <div>|</div>
-          <div>Level: {gameState.difficulty}</div>
+
+          {/* Score Display */}
+          <div
+            style={{
+              position: "absolute",
+              top: "-22px",
+              right: "0",
+              fontSize: "16px",
+              color: "#333",
+            }}
+          >
+            {gameState.score}/{gameState.totalPlayed}
+          </div>
+
+          {/* Main Progress Bar */}
+          <div
+            style={{
+              width: "100%",
+              height: "16px",
+              backgroundColor: "#e0e0e0",
+              borderRadius: "8px",
+              overflow: "hidden",
+              position: "relative",
+              boxShadow: "inset 0 1px 3px rgba(0,0,0,0.2)",
+            }}
+          >
+            {/* Score Progress (Background Fill) */}
+            <div
+              style={{
+                height: "100%",
+                width: getScoreProgressWidth(),
+                backgroundColor: "#6d98f7",
+                borderRadius: "8px",
+                transition: "width 0.3s ease-in-out",
+                zIndex: 1,
+                position: "relative",
+              }}
+            />
+
+            {/* Streak Progress Segments */}
+            <div
+              style={{
+                position: "absolute",
+                top: "0",
+                left: "0",
+                height: "100%",
+                width: `${gameState.consecutiveCorrect * 20}%`,
+                backgroundColor: "#4285F4",
+                borderRadius: "8px 0 0 8px",
+                transition: "width 0.3s ease-in-out",
+                zIndex: 0,
+              }}
+            />
+
+            {/* Segment Markers */}
+            {renderSegmentMarkers()}
+          </div>
+
+          {/* "5 in a row" text */}
+          <div
+            style={{
+              position: "absolute",
+              right: "0",
+              bottom: "-20px",
+              fontSize: "14px",
+              color: "#666",
+            }}
+          >
+            {gameState.consecutiveCorrect}/5 to next level
+          </div>
         </div>
       </div>
 
