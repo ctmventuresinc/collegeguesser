@@ -2,7 +2,23 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["images.sidearmdev.com", "dxbhsrqyrr690.cloudfront.net"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.sidearmdev.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "dxbhsrqyrr690.cloudfront.net",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "d33mrnwqfel57x.cloudfront.net",
+        pathname: "**",
+      },
+    ],
   },
 };
 
