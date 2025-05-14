@@ -91,28 +91,29 @@ export default function Home() {
         <div
           style={{
             position: "relative",
-            width: "auto",
-            height: "60vh",
-            maxHeight: "60vh",
+            width: "min(320px, 80vw)",
+            height: "min(416px, 60vh)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            backgroundColor: "white",
+            borderRadius: "16px",
+            boxShadow: "0 6px 24px rgba(0,0,0,0.10)",
+            aspectRatio: "200/259",
+            overflow: "hidden",
           }}
         >
           <Image
             src={currentStudent.imageUrl}
             alt="Student"
             style={{
+              width: "100%",
               height: "100%",
-              width: "auto",
-              maxWidth: "90vw",
-              maxHeight: "60vh",
-              objectFit: "contain",
-              borderRadius: "16px",
-              boxShadow: "0 6px 24px rgba(0,0,0,0.10)",
+              objectFit: "cover",
+              objectPosition: "center",
             }}
-            width={500}
-            height={650}
+            width={200}
+            height={259}
             priority
           />
           {feedback && (
