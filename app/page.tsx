@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { GameManager, GameState } from "./utils/gameLogic";
 import { Student, School } from "./data/students";
+import InstructionsOverlay from "./components/InstructionsOverlay";
+import LevelUpNotification from "./components/LevelUpNotification";
 
 export default function Home() {
   const [gameManager] = useState<GameManager>(() => new GameManager());
@@ -11,16 +13,42 @@ export default function Home() {
     currentStudent: null,
     score: 0,
     totalPlayed: 0,
+    consecutiveCorrect: 0,
+    difficulty: 1,
+    showInstructions: true,
   });
   const [feedback, setFeedback] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(true);
+  const [showLevelUp, setShowLevelUp] = useState(false);
+  const [previousDifficulty, setPreviousDifficulty] = useState(1);
 
   useEffect(() => {
     // Start first round on component mount
     const student = gameManager.startNewRound();
     setCurrentStudent(student);
     setGameState(gameManager.getGameState());
+    setPreviousDifficulty(gameManager.getGameState().difficulty);
   }, [gameManager]);
+
+  // Check if difficulty has increased
+  useEffect(() => {
+    if (gameState.difficulty > previousDifficulty) {
+      // Show level up notification
+      setShowLevelUp(true);
+      setPreviousDifficulty(gameState.difficulty);
+    }
+  }, [gameState.difficulty, previousDifficulty]);
+
+  const handleInstructionsDismiss = () => {
+    gameManager.dismissInstructions();
+    setShowInstructions(false);
+    setGameState(gameManager.getGameState());
+  };
+
+  const handleLevelUpDismiss = () => {
+    setShowLevelUp(false);
+  };
 
   const handleSchoolSelection = (selectedSchool: School) => {
     if (isAnimating) return;
@@ -57,6 +85,19 @@ export default function Home() {
         padding: "50px 0 200px 0",
       }}
     >
+      {/* Instructions Overlay */}
+      <InstructionsOverlay
+        isVisible={showInstructions}
+        onClose={handleInstructionsDismiss}
+      />
+
+      {/* Level Up Notification */}
+      <LevelUpNotification
+        show={showLevelUp}
+        level={gameState.difficulty}
+        onDismiss={handleLevelUpDismiss}
+      />
+
       {/* Element 1: Header */}
       <div
         style={{
@@ -79,13 +120,22 @@ export default function Home() {
         </h1>
         <div
           style={{
-            fontSize: "min(20px, 3vh)",
+            display: "flex",
+            gap: "15px",
+            alignItems: "center",
+            fontSize: "min(18px, 2.8vh)",
             fontFamily: "sans-serif",
             marginTop: "0.5vh",
             color: "#000",
           }}
         >
-          Score: {gameState.score}/{gameState.totalPlayed}
+          <div>
+            Score: {gameState.score}/{gameState.totalPlayed}
+          </div>
+          <div>|</div>
+          <div>Streak: {gameState.consecutiveCorrect}/5</div>
+          <div>|</div>
+          <div>Level: {gameState.difficulty}</div>
         </div>
       </div>
 
