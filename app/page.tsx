@@ -48,29 +48,27 @@ export default function Home() {
       style={{
         height: "100vh",
         width: "100vw",
-        overflow: "hidden",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        padding: "2vh 5vw 80px 5vw",
         boxSizing: "border-box",
         backgroundColor: "#f5f5f5",
         color: "#000",
+        overflow: "hidden",
+        padding: "50px 0 200px 0",
       }}
     >
+      {/* Element 1: Header */}
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          paddingTop: "2vh",
-          width: "100%",
+          padding: "0",
         }}
       >
         <h1
           style={{
-            fontSize: "min(48px, 8vh)",
+            fontSize: "min(42px, 6vh)",
             fontWeight: "bold",
             fontFamily: "sans-serif",
             margin: 0,
@@ -81,9 +79,9 @@ export default function Home() {
         </h1>
         <div
           style={{
-            fontSize: "min(24px, 4vh)",
+            fontSize: "min(20px, 3vh)",
             fontFamily: "sans-serif",
-            marginTop: "1vh",
+            marginTop: "0.5vh",
             color: "#000",
           }}
         >
@@ -91,86 +89,90 @@ export default function Home() {
         </div>
       </div>
 
-      {currentStudent && (
-        <div
-          style={{
-            position: "relative",
-            width: "auto",
-            height: "calc(100vh - 200px)",
-            maxWidth: "calc(100vw - 90px)",
-            maxHeight: "50vh",
-            margin: "10px auto",
-            aspectRatio: "200/259",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "white",
-            borderRadius: "16px",
-            boxShadow: "0 6px 24px rgba(0,0,0,0.10)",
-            overflow: "hidden",
-          }}
-        >
-          <Image
-            src={currentStudent.imageUrl}
-            alt="Student"
+      {/* Element 2: Student Photo - Will fill available space */}
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "5px 0",
+        }}
+      >
+        {currentStudent && (
+          <div
             style={{
-              width: "100%",
+              position: "relative",
+              width: "auto",
               height: "100%",
-              objectFit: "cover",
-              objectPosition: "center",
+              maxWidth: "calc(100vw - 90px)",
+              maxHeight: "90%",
+              aspectRatio: "200/259",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "white",
+              borderRadius: "16px",
+              boxShadow: "0 6px 24px rgba(0,0,0,0.10)",
+              overflow: "hidden",
             }}
-            width={200}
-            height={259}
-            priority
-          />
-          {feedback && (
-            <div
+          >
+            <Image
+              src={currentStudent.imageUrl}
+              alt="Student"
               style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                backgroundColor:
-                  feedback === "Correct!"
-                    ? "rgba(0, 128, 0, 0.8)"
-                    : "rgba(255, 0, 0, 0.8)",
-                color: "white",
-                padding: "20px 40px",
-                borderRadius: "8px",
-                fontSize: "min(36px, 6vh)",
-                fontWeight: "bold",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "50% 30%",
               }}
-            >
-              {feedback}
-            </div>
-          )}
-        </div>
-      )}
+              width={200}
+              height={259}
+              priority
+            />
+            {feedback && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  backgroundColor:
+                    feedback === "Correct!"
+                      ? "rgba(0, 128, 0, 0.8)"
+                      : "rgba(255, 0, 0, 0.8)",
+                  color: "white",
+                  padding: "20px 40px",
+                  borderRadius: "8px",
+                  fontSize: "min(36px, 6vh)",
+                  fontWeight: "bold",
+                }}
+              >
+                {feedback}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
 
+      {/* Element 3: Buttons */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: "20px",
+          gap: "15px",
           width: "100%",
-          maxWidth: "600px",
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          padding: "15px 20px",
-          backgroundColor: "#f5f5f5",
-          boxShadow: "0 -2px 10px rgba(0,0,0,0.1)",
-          zIndex: 100,
+          padding: "10px 20px 0 20px",
+          backgroundColor: "transparent",
         }}
       >
         <button
           onClick={() => handleSchoolSelection("Howard")}
           disabled={isAnimating}
           style={{
-            padding: "min(20px, 3vh)",
+            padding: "min(15px, 2.5vh)",
             width: "50%",
-            fontSize: "min(28px, 5vh)",
+            fontSize: "min(24px, 4vh)",
             fontWeight: "bold",
             color: "white",
             backgroundColor: "#8B0000",
@@ -186,9 +188,9 @@ export default function Home() {
           onClick={() => handleSchoolSelection("Hampton")}
           disabled={isAnimating}
           style={{
-            padding: "min(20px, 3vh)",
+            padding: "min(15px, 2.5vh)",
             width: "50%",
-            fontSize: "min(28px, 5vh)",
+            fontSize: "min(24px, 4vh)",
             fontWeight: "bold",
             color: "white",
             backgroundColor: "#00008B",
