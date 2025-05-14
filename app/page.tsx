@@ -109,11 +109,14 @@ export default function Home() {
       >
         <h1
           style={{
-            fontSize: "min(42px, 6vh)",
-            fontWeight: "bold",
-            fontFamily: "sans-serif",
+            fontSize: "54px",
+            fontWeight: 700,
+            fontFamily: "Inter, Helvetica, Arial, sans-serif",
             margin: 0,
             color: "#000",
+            letterSpacing: "-1px",
+            display: "inline-block",
+            cursor: "pointer",
           }}
         >
           WhichHU.com
